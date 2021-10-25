@@ -2,7 +2,7 @@ from tkinter import *
 import sys
 
 def com1():
-    if entry1.get() == 'admin' and entry2.get() == '123123':
+    if entry1.get() == 'admin' and entry2.get() == '123':
         root.deiconify()
         top.destroy()
 
