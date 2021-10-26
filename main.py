@@ -12,6 +12,12 @@ def register_user():
     if len(username.get() and password.get()) == 0:
         error = messagebox.showerror("Cool Beans", "fields cannot be empty, idiot")
         Label(frame2, text=error)
+    elif len(username.get() and password.get()) < 5:
+        error1 = messagebox.showerror("Cool Beans", "Username and password must have at least 6 characters")
+        Label(frame2, text=error1)
+    elif "," in username.get() or "," in password.get():
+       error2 = messagebox.showerror("Cool Beans", "Username and password cannot contain ',' ")
+       Label(frame2, text=error2)
     else:
        file=open("user_details.txt","a")
        file.write("\n"+username_info+","+password_info)
@@ -22,8 +28,8 @@ def register_user():
 
 #admin login verification
 def admin_verify():
-    username1 = username_verify1.get()
-    password1 = password_verify1.get()
+    username = username_verify1.get()
+    password = password_verify1.get()
     username_entry2.delete(0,END)
     password_entry2.delete(0,END)
     
@@ -32,7 +38,7 @@ def admin_verify():
         a,b = i.split(",")
         a = a.strip()
         b = b.strip()
-        if(a == username1 and b == password1):
+        if(a == username and b == password):
             login_success()
             break
     else:
