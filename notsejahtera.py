@@ -216,6 +216,7 @@ Label(frame6,text = "").pack()
 #vaccination appointment status screen
 Label(frame7,text = "NotSejahtera",bg = "grey", font = ("Calibri", 20)).pack(fil = 'x')
 Button(frame7, text = "Back",width = 50, height=1, pady = 10, command = lambda:show_frame(frame5)).pack()
+#to be continued
 
 
 screen.mainloop()
