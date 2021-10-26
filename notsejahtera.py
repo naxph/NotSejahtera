@@ -93,9 +93,13 @@ frame3 = Frame(screen)
 frame4 = Frame(screen)
 frame5 = Frame(screen)
 frame6 = Frame(screen)
+frame7 = Frame(screen)
+frame8 = Frame(screen)
+frame9 = Frame(screen)
+frame10 = Frame(screen)
 screen.rowconfigure(0, weight=1)
 screen.columnconfigure(0,weight=1)
-for frame in(frame1,frame2,frame3,frame4,frame5,frame6):
+for frame in(frame1,frame2,frame3,frame4,frame5,frame6,frame7,frame8,frame9,frame10):
     frame.grid(row=0,column=0,sticky="nsew")
 
 show_frame(frame1)
@@ -106,6 +110,7 @@ Label(frame1,text = "").pack()
 Button(frame1,text = "Register", height = "2", width = "30", command= lambda:show_frame(frame2)).pack()
 Label(frame1,text = "").pack()
 Button(frame1, text = "Admin Login",height = "2", width = "30", command = lambda:show_frame(frame4)).pack()
+Label(frame1,text = "").pack()
 
 
 #register
@@ -180,9 +185,28 @@ Button(frame4, text = "Back",width = 10, height=1,command = lambda:show_frame(fr
 Label(frame5,text = "NotSejahtera",bg = "grey", font = ("Calibri", 20)).pack(fil = 'x')
 Label(frame5,text = "Welcome back, <USER>. Your current risk status is <RISK FACTOR>.", font = ("Calibri", 20), pady = 50, padx = 10).pack()
 Button(frame5, text = "Click here to update your Personal Information",width = 50, height=1, pady = 20, command = lambda:show_frame(frame6)).pack()
-Button(frame5, text = "Vaccination Appointment Status",width = 50, height=1, pady = 20, command = lambda:show_frame()).pack()
+Button(frame5, text = "Vaccination Appointment Status",width = 50, height=1, pady = 20, command = lambda:show_frame(frame7)).pack()
+Button(frame5, text = "Logout",width = 50, height=1, pady = 20, command = lambda:show_frame(frame1)).pack()
 
-# to be continued
+
+#screen to update personal information
+Label(frame6,text = "NotSejahtera",bg = "grey", font = ("Calibri", 20)).pack(fil = 'x')
+Label(frame6,text = "Please enter your personal details to register yourself for a vaccine appointment.", pady = 20, padx = 20, font = ("Calibri", 10)).pack()
+Label(frame6,text = "Full Name as per NRIC", pady = 10).pack()
+fullNameEntry = Entry(frame6, width=70)
+fullNameEntry.pack()
+Label(frame6,text = "Age", pady = 10).pack() 
+ageEntry = Entry(frame6, width=10)
+ageEntry.pack()
+Label(frame6,text = "Phone Number", pady = 10).pack()
+phoneEntry = Entry(frame6, width=30)
+phoneEntry.pack()
+Label(frame6,text = "Postcode", pady = 10).pack()
+postcodeEntry = Entry(frame6, width=20)
+postcodeEntry.pack()
+Label(frame6,text = "").pack()
+Button(frame6, text = "Confirm Details",width = 50, height=1, pady = 10).pack()
+Button(frame6, text = "Cancel",width = 50, height=1, pady = 10, command = lambda:show_frame(frame5)).pack()
 
 
 
