@@ -80,7 +80,7 @@ def wrong_password1():
 global screen
 screen = Tk()
 screen.state("zoomed")
-screen.title("MySejahtera")
+screen.title("NotSejahtera")
 frame1 = Frame(screen)
 frame2 = Frame(screen)
 frame3 = Frame(screen)
@@ -93,7 +93,7 @@ for frame in(frame1,frame2,frame3,frame4,frame5,frame6):
     frame.grid(row=0,column=0,sticky="nsew")
 
 show_frame(frame1)
-Label(frame1,text = "MySejahtera",bg = "grey", font = ("Calibri", 20)).pack(fil = 'x')
+Label(frame1,text = "NotSejahtera",bg = "grey", font = ("Calibri", 20)).pack(fil = 'x')
 Label(frame1,text = "",height=18).pack()
 Button(frame1,text = "Login", height = "2", width = "30", command = lambda:show_frame(frame3)).pack()
 Label(frame1,text = "").pack()
@@ -109,7 +109,7 @@ global username_entry
 global password_entry
 username = StringVar()
 password = StringVar()
-Label(frame2,text = "MySejahtera",bg = "grey", font = ("Calibri", 20)).pack(fil = 'x')
+Label(frame2,text = "NotSejahtera",bg = "grey", font = ("Calibri", 20)).pack(fil = 'x')
 Label(frame2,text = "Please enter details below to Register an account").pack()
 Label(frame2,text = "Username * ").pack()
 username_entry = Entry(frame2,textvariable=username)
@@ -123,7 +123,7 @@ Label(frame2,text = "").pack()
 Button(frame2,text="Back",width = 10, height = 1,command =lambda:show_frame(frame1)).pack()
 
 #login
-Label(frame3,text = "MySejahtera",bg = "grey", font = ("Calibri", 20)).pack(fil = 'x')
+Label(frame3,text = "NotSejahtera",bg = "grey", font = ("Calibri", 20)).pack(fil = 'x')
 Label(frame3,text = "Please enter details below to login").pack()
 global username_verify
 global password_verify
@@ -147,7 +147,7 @@ Button(frame3, text = "Back",width = 10, height=1,command = lambda:show_frame(fr
 
 
 #admin login
-Label(frame4,text = "MySejahtera",bg = "grey", font = ("Calibri", 20)).pack(fil = 'x')
+Label(frame4,text = "NotSejahtera",bg = "grey", font = ("Calibri", 20)).pack(fil = 'x')
 Label(frame4,text = "Please enter details below to login").pack()
 global username_verify1
 global password_verify1
