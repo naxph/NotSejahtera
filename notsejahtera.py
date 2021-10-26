@@ -87,16 +87,16 @@ global screen
 screen = Tk()
 screen.state("zoomed")
 screen.title("NotSejahtera")
-frame1 = Frame(screen)
-frame2 = Frame(screen)
-frame3 = Frame(screen)
-frame4 = Frame(screen)
-frame5 = Frame(screen)
-frame6 = Frame(screen)
-frame7 = Frame(screen)
-frame8 = Frame(screen)
-frame9 = Frame(screen)
-frame10 = Frame(screen)
+frame1 = Frame(screen) #startup screen
+frame2 = Frame(screen) #register screen
+frame3 = Frame(screen) #public user login screen
+frame4 = Frame(screen) #admin login screen
+frame5 = Frame(screen) #public user main landing page for after login
+frame6 = Frame(screen) #public user update information form
+frame7 = Frame(screen) #public user vaccination appointment status page
+frame8 = Frame(screen) #unused
+frame9 = Frame(screen) #unused
+frame10 = Frame(screen) #unused
 screen.rowconfigure(0, weight=1)
 screen.columnconfigure(0,weight=1)
 for frame in(frame1,frame2,frame3,frame4,frame5,frame6,frame7,frame8,frame9,frame10):
@@ -204,10 +204,18 @@ phoneEntry.pack()
 Label(frame6,text = "Postcode", pady = 10).pack()
 postcodeEntry = Entry(frame6, width=20)
 postcodeEntry.pack()
+Label(frame6,text = "Do you have any chronic illnesses?(Diabetes, heart conditions, etc.)", pady = 10).pack()
+Button(frame6, text = "Yes",width = 10, height=1).pack()
+Button(frame6, text = "No",width = 10, height=1).pack()
+Label(frame6,text = "").pack()
 Label(frame6,text = "").pack()
 Button(frame6, text = "Confirm Details",width = 50, height=1, pady = 10).pack()
 Button(frame6, text = "Cancel",width = 50, height=1, pady = 10, command = lambda:show_frame(frame5)).pack()
+Label(frame6,text = "").pack()
 
+#vaccination appointment status screen
+Label(frame7,text = "NotSejahtera",bg = "grey", font = ("Calibri", 20)).pack(fil = 'x')
+Button(frame7, text = "Back",width = 50, height=1, pady = 10, command = lambda:show_frame(frame5)).pack()
 
 
 screen.mainloop()
