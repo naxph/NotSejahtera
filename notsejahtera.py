@@ -90,13 +90,40 @@ def wrong_password1():
     messagebox.showinfo("Cool Beans", "wrong username or password")
     show_frame(frame1)
 
-#information update system
-def no_password():
+#personal information update system
+def no_password(): #shows error if wrong username or password
     messagebox.showinfo("Error", "Wrong username or password")
     show_frame(frame5)
 
 
-def update_success():
+def already_registered(): #shows error if the user has already registered
+    messagebox.showinfo("Error", "You have already registered for vaccination. Please check the Vaccination Appointment Status page within 3-5 days for updates.")
+    show_frame(frame5)
+
+
+def check_register(): #checks if user has registered for vaccine
+    username1 = usernameUpdateEntry.get()
+    password1 = passwordUpdateEntry.get()
+    readFile = open("user_personalinfo.txt", "r")
+
+    for line in readFile:
+        a,b,c,d,e,f,g = line.split(",")
+        a = a.strip()
+        b = b.strip()
+        c = c.strip()
+        d = d.strip()
+        e = e.strip()
+        f = f.strip()
+        g = g.strip()
+
+        if(a == username1 and b == password1):
+            already_registered()
+            break
+    else:
+        update_success()
+        
+
+def update_success(): #writes information to file
     username1 = usernameUpdateEntry.get()
     password1 = passwordUpdateEntry.get()
     fullNameInfo = fullNameEntry.get()
@@ -123,7 +150,7 @@ def update_success():
     show_frame(frame5)
     
 
-def update_info():
+def update_info(): #checks if username and password are correct
     username1 = usernameUpdateEntry.get()
     password1 = passwordUpdateEntry.get()
     readFile = open("user_details.txt", "r")
@@ -133,7 +160,7 @@ def update_info():
         a = a.strip()
         b = b.strip()
         if(a == username1 and b == password1):
-            update_success()
+            check_register()
             break
     else:
         no_password()
