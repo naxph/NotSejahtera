@@ -90,6 +90,55 @@ def wrong_password1():
     messagebox.showinfo("Cool Beans", "wrong username or password")
     show_frame(frame1)
 
+#information update system
+def no_password():
+    messagebox.showinfo("Error", "Wrong username or password")
+    show_frame(frame5)
+
+
+def update_success():
+    username1 = usernameUpdateEntry.get()
+    password1 = passwordUpdateEntry.get()
+    fullNameInfo = fullNameEntry.get()
+    ageInfo = ageEntry.get()
+    phoneInfo = phoneEntry.get()
+    postcodeInfo = postcodeEntry.get()
+    chronicDiseaseInfo = chronicDisease.get()
+    updateFile = open("user_personalinfo.txt", "a")
+
+    if chronicDiseaseInfo == 1:
+        updateFile.write("\n"+username1+","+password1+","+fullNameInfo+","+ageInfo+","+phoneInfo+","+postcodeInfo+","+"True")
+        updateFile.close()
+    elif chronicDiseaseInfo == 0:
+        updateFile.write("\n"+username1+","+password1+","+fullNameInfo+","+ageInfo+","+phoneInfo+","+postcodeInfo+","+"False")
+        updateFile.close()
+
+    usernameUpdateEntry.delete(0,END)
+    passwordUpdateEntry.delete(0,END)
+    fullNameEntry.delete(0,END)
+    ageEntry.delete(0,END)
+    phoneEntry.delete(0,END)
+    postcodeEntry .delete(0,END)    
+    messagebox.showinfo("Registration Successful", "Your registration for the COVID-19 Vaccine was successful. Please check the Vaccination Appointment Status page within 3-5 days for updates.")
+    show_frame(frame5)
+    
+
+def update_info():
+    username1 = usernameUpdateEntry.get()
+    password1 = passwordUpdateEntry.get()
+    readFile = open("user_details.txt", "r")
+    
+    for line in readFile:
+        a,b = line.split(",")
+        a = a.strip()
+        b = b.strip()
+        if(a == username1 and b == password1):
+            update_success()
+            break
+    else:
+        no_password()
+
+
 #startup screen
 global screen
 screen = Tk()
@@ -100,7 +149,7 @@ frame2 = Frame(screen) #register screen
 frame3 = Frame(screen) #public user login screen
 frame4 = Frame(screen) #admin login screen
 frame5 = Frame(screen) #public user main landing page for after login
-frame6 = Frame(screen) #public user update information form
+frame6 = Frame(screen) #public user vaccination registration form
 frame7 = Frame(screen) #public user vaccination appointment status page
 frame8 = Frame(screen) #unused
 frame9 = Frame(screen) #unused
@@ -192,35 +241,41 @@ Button(frame4, text = "Back",width = 10, height=1,command = lambda:show_frame(fr
 #information screen after login
 Label(frame5,text = "NotSejahtera",bg = "grey", font = ("Calibri", 20)).pack(fil = 'x')
 Label(frame5,text = "Welcome back, <USER>. Your current risk status is <RISK FACTOR>.", font = ("Calibri", 20), pady = 50, padx = 10).pack()
-Button(frame5, text = "Click here to update your Personal Information",width = 50, height=1, pady = 20, command = lambda:show_frame(frame6)).pack()
+Button(frame5, text = "Vaccine Registration",width = 50, height=1, pady = 20, command = lambda:show_frame(frame6)).pack()
 Button(frame5, text = "Vaccination Appointment Status",width = 50, height=1, pady = 20, command = lambda:show_frame(frame7)).pack()
 Button(frame5, text = "Logout",width = 50, height=1, pady = 20, command = lambda:show_frame(frame1)).pack()
 
 
-#screen to update personal information
+#vaccination registration form
 Label(frame6,text = "NotSejahtera",bg = "grey", font = ("Calibri", 20)).pack(fil = 'x')
-Label(frame6,text = "Please enter your personal details to register yourself for a vaccine appointment.", pady = 20, padx = 20, font = ("Calibri", 10)).pack()
+Label(frame6,text = "Please enter your personal details to register yourself for a vaccine appointment. Please ensure your personal details are correct before submitting.", pady = 20, padx = 20, font = ("Calibri", 10)).pack()
+Label(frame6,text = "Current Username", pady = 10).pack()
+usernameUpdateEntry = Entry(frame6, width=15)
+usernameUpdateEntry.pack()
+Label(frame6,text = "Current Password", pady = 10).pack()
+passwordUpdateEntry = Entry(frame6, width=15)
+passwordUpdateEntry.pack()
 Label(frame6,text = "Full Name as per NRIC", pady = 10).pack()
 fullNameEntry = Entry(frame6, width=70)
 fullNameEntry.pack()
-Label(frame6,text = "Age", pady = 10).pack() 
+Label(frame6,text = "Age", pady = 5).pack() 
 ageEntry = Entry(frame6, width=10)
 ageEntry.pack()
 Label(frame6,text = "Phone Number", pady = 10).pack()
-phoneEntry = Entry(frame6, width=30)
+phoneEntry = Entry(frame6, width=20)
 phoneEntry.pack()
-Label(frame6,text = "Postcode", pady = 10).pack()
+Label(frame6,text = "Postcode", pady = 5).pack()
 postcodeEntry = Entry(frame6, width=20)
 postcodeEntry.pack()
 Label(frame6,text = "Do you have any chronic illnesses?(Diabetes, heart conditions, etc.)", pady = 10).pack()
 chronicDisease = IntVar()
-yesButton = Radiobutton(frame6, text="Yes", variable=chronicDisease, value=True)
+yesButton = Radiobutton(frame6, text="Yes", variable=chronicDisease, value=1)
 yesButton.pack()
-noButton = Radiobutton(frame6, text="No", variable=chronicDisease, value=False)
+noButton = Radiobutton(frame6, text="No", variable=chronicDisease, value=0)
 noButton.pack()
 Label(frame6,text = "").pack()
 Label(frame6,text = "").pack()
-Button(frame6, text = "Confirm Details",width = 50, height=1, pady = 10).pack()
+Button(frame6, text = "Confirm Details",width = 50, height=1, pady = 10, command=update_info).pack()
 Button(frame6, text = "Cancel",width = 50, height=1, pady = 10, command = lambda:show_frame(frame5)).pack()
 Label(frame6,text = "").pack()
 
