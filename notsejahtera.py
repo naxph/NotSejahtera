@@ -103,6 +103,12 @@ def no_password(): #shows error if wrong username or password
 
 def already_registered(): #shows error if the user has already registered
     messagebox.showinfo("Error", "You have already registered for vaccination. Please check the Vaccination Appointment Status page within 3-5 days for updates.")
+    usernameUpdateEntry.delete(0,END)
+    passwordUpdateEntry.delete(0,END)
+    fullNameEntry.delete(0,END)
+    ageEntry.delete(0,END)
+    phoneEntry.delete(0,END)
+    postcodeEntry .delete(0,END)  
     show_frame(frame5)
 
 
