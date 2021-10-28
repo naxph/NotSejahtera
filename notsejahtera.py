@@ -10,29 +10,34 @@ def register_user():
     username_info = username.get()
     password_info = password.get()
     file = open("user_details.txt","r")
-    for i in file:
+    for i in file.readlines():
         a,b = i.split(",")
         a = a.strip()
         b = b.strip()
-    if len(username.get() and password.get()) == 0:
-        error = messagebox.showerror("Cool Beans", "fields cannot be empty, idiot")
-        Label(frame2, text=error)
-    elif len(username.get() and password.get()) < 5:
-        error1 = messagebox.showerror("Cool Beans", "Username and password must have at least 6 characters")
-        Label(frame2, text=error1)
-    elif "," in username.get() or "," in password.get():
-       error2 = messagebox.showerror("Cool Beans", "Username and password cannot contain ',' ")
-       Label(frame2, text=error2)
-    elif(a == username_info):
-       error3 = messagebox.showerror("Cool Beans", "Username already taken ")
-       Label(frame2, text=error3)
+        if len(username.get() and password.get()) == 0:
+           error = messagebox.showerror("Cool Beans", "fields cannot be empty, idiot")
+           Label(frame2, text=error)
+           break
+        elif len(username.get() and password.get()) < 5:
+           error1 = messagebox.showerror("Cool Beans", "Username and password must have at least 6 characters")
+           Label(frame2, text=error1)
+           break
+        elif "," in username.get() or "," in password.get():
+           error2 = messagebox.showerror("Cool Beans", "Username and password cannot contain ',' ")
+           Label(frame2, text=error2)
+           break
+        elif(a == username.get()):
+           error3 = messagebox.showerror("Cool Beans", "Username already taken ")
+           Label(frame2, text=error3)
+           break
     else:
-       file=open("user_details.txt","a")
-       file.write("\n"+username_info+","+password_info)
-       file.close()
-       username_entry.delete(0,END)
-       password_entry.delete(0,END)
-       Label(frame2, text = "Registration successful",fg="green",font=("Calibri", 12)).pack()
+        file=open("user_details.txt","a")
+        file.write("\n"+username_info+","+password_info)
+        file.close()
+        username_entry.delete(0,END)
+        password_entry.delete(0,END)
+        info = messagebox.showinfo("Cool Beans", "Registration successful")
+        Label(frame2, text = info)
 
 #admin login verification
 def admin_verify():
