@@ -1,6 +1,7 @@
 from tkinter import*
 from tkinter import messagebox
 
+
 #Switch frames
 def show_frame(frame):
     frame.tkraise()
@@ -63,21 +64,21 @@ def login_verify():
     password1 = password_verify.get()
     username_entry1.delete(0,END)
     password_entry1.delete(0,END)
-    
     file = open("user_details.txt","r")
     for i in file:
         a,b = i.split(",")
         a = a.strip()
         b = b.strip()
         if(a == username1 and b == password1):
+            current_username(username1)
             login_success()
             break
     else:
         wrong_password()
-                
+
 #public user
 def login_success():
-    messagebox.showinfo("Cool Beans", "Login successful")
+    messagebox.showinfo("Cool Beans", "Login Successful")
     show_frame(frame5)
     #public user main page goes here
 
@@ -176,6 +177,13 @@ def update_info(): #checks if username and password are correct
     else:
         no_password()
 
+tempuser = ''
+def current_username(a): #Checks current username
+    global tempuser
+    tempuser = a
+    info_screen()
+
+
 
 #startup screen
 global screen
@@ -193,7 +201,7 @@ frame8 = Frame(screen) #unused
 frame9 = Frame(screen) #unused
 frame10 = Frame(screen) #unused
 screen.rowconfigure(0, weight=1)
-screen.columnconfigure(0,weight=1)
+screen.columnconfigure(0, weight=1)
 for frame in(frame1,frame2,frame3,frame4,frame5,frame6,frame7,frame8,frame9,frame10):
     frame.grid(row=0,column=0,sticky="nsew")
 
@@ -244,7 +252,7 @@ username_entry1 = Entry(frame3,textvariable=username_verify)
 username_entry1.pack()
 Label(frame3,text = "").pack()
 Label(frame3,text = "Password * ").pack()
-password_entry1 = Entry(frame3,textvariable=password_verify)
+password_entry1 = Entry(frame3,textvariable=password_verify,show="*") #changed to * characters
 password_entry1.pack()
 Label(frame3,text = "").pack()
 Button(frame3, text = "Login",width = 10, height=1,command = login_verify).pack()
@@ -268,7 +276,7 @@ username_entry2 = Entry(frame4,textvariable=username_verify1)
 username_entry2.pack()
 Label(frame4,text = "").pack()
 Label(frame4,text = "Password * ").pack()
-password_entry2 = Entry(frame4,textvariable=password_verify1)
+password_entry2 = Entry(frame4,textvariable=password_verify1, show="*")
 password_entry2.pack()
 Label(frame4,text = "").pack()
 Button(frame4, text = "Login",width = 10, height=1,command = admin_verify).pack()
@@ -277,12 +285,31 @@ Button(frame4, text = "Back",width = 10, height=1,command = lambda:show_frame(fr
 
 
 #information screen after login
-Label(frame5,text = "NotSejahtera",bg = "grey", font = ("Calibri", 20)).pack(fil = 'x')
-Label(frame5,text = "Welcome back, <USER>. Your current risk status is <RISK FACTOR>.", font = ("Calibri", 20), pady = 50, padx = 10).pack()
-Button(frame5, text = "Vaccine Registration",width = 50, height=1, pady = 20, command = lambda:show_frame(frame6)).pack()
-Button(frame5, text = "Vaccination Appointment Status",width = 50, height=1, pady = 20, command = lambda:show_frame(frame7)).pack()
-Button(frame5, text = "Logout",width = 50, height=1, pady = 20, command = lambda:show_frame(frame1)).pack()
+risk_status = ''
+def info_screen():
+    openAnother = open("user_personalinfo.txt","r")
+    xdlines = list(openAnother.readlines())
 
+    for i in xdlines:
+        a, b, c, d, e, f, g = i.split(",")
+        a = a.strip()
+        b = b.strip()
+        c = c.strip()
+        d = d.strip()
+        e = e.strip()
+        f = f.strip()
+        g = g.strip()
+        if a == tempuser:
+            if (int(d) > 60) or (g =="True"):
+                global risk_status
+                risk_status = "High"
+            else:
+                risk_status = "Low"
+    Label(frame5,text = "NotSejahtera",bg = "grey", font = ("Calibri", 20)).pack(fil = 'x')
+    Label(frame5,text = f"Welcome back, {tempuser}. Your current risk status is {risk_status}.", font = ("Calibri", 20), pady = 50, padx = 10).pack()
+    Button(frame5, text = "Vaccine Registration",width = 50, height=1, pady = 20, command = lambda:show_frame(frame6)).pack()
+    Button(frame5, text = "Vaccination Appointment Status",width = 50, height=1, pady = 20, command = lambda:show_frame(frame7)).pack()
+    Button(frame5, text = "Logout",width = 50, height=1, pady = 20, command = lambda:show_frame(frame1)).pack()
 
 #vaccination registration form
 Label(frame6,text = "NotSejahtera",bg = "grey", font = ("Calibri", 20)).pack(fil = 'x')
