@@ -197,7 +197,7 @@ frame4 = Frame(screen) #admin login screen
 frame5 = Frame(screen) #public user main landing page for after login
 frame6 = Frame(screen) #public user vaccination registration form
 frame7 = Frame(screen) #public user vaccination appointment status page
-frame8 = Frame(screen) #unused
+frame8 = Frame(screen) #add/remove vaccination centre
 frame9 = Frame(screen) #unused
 frame10 = Frame(screen) #unused
 screen.rowconfigure(0, weight=1)
@@ -348,6 +348,44 @@ Label(frame6,text = "").pack()
 Label(frame7,text = "NotSejahtera",bg = "grey", font = ("Calibri", 20)).pack(fil = 'x')
 Button(frame7, text = "Back",width = 50, height=1, pady = 10, command = lambda:show_frame(frame5)).pack()
 #to be continued
+
+
+#add/remove vaccination centre
+Vac_centre=['Cyberjaya, MMU','Serdang, Hospital Serdang','Subang Jaya, INTI University']
+
+def add():
+    x = textbox.get()
+    vac_list.insert((len(Vac_centre)+1),x)
+    textbox.delete(0,END)
+    return
+
+# deletes selected item
+def remove():
+    y = vac_list.curselection()
+    for i in y[::-1]:
+        vac_list.delete(i)
+        return
+
+
+vac_list = Listbox(frame8,height=20,width=50)
+for i in range(len(Vac_centre)):
+    vac_list.insert(i,(Vac_centre[i]))
+
+
+add_button = Button(frame8,text='Add vaccination centre',command=lambda: add())
+remove_button = Button(frame8,text='Remove vaccination centre',command=lambda: remove())
+textbox = Entry(frame8,text = '',width=50)
+space = Label(frame8, text='', pady=50)
+space2 = Label(frame8,text='')
+
+
+space.pack()
+vac_list.pack()
+textbox.pack()
+space2.pack()
+add_button.pack()
+remove_button.pack()
+
 
 
 screen.mainloop()
