@@ -109,7 +109,8 @@ def already_registered(): #shows error if the user has already registered
     fullNameEntry.delete(0,END)
     ageEntry.delete(0,END)
     phoneEntry.delete(0,END)
-    postcodeEntry .delete(0,END)  
+    postcodeEntry .delete(0,END)
+    occupationEntry.delete(0,END)  
     show_frame(frame5)
 
 
@@ -119,7 +120,7 @@ def check_register(): #checks if user has registered for vaccine
     readFile = open("user_personalinfo.txt", "r")
 
     for line in readFile:
-        a,b,c,d,e,f,g = line.split(",")
+        a,b,c,d,e,f,g,h = line.split(",")
         a = a.strip()
         b = b.strip()
         c = c.strip()
@@ -127,6 +128,7 @@ def check_register(): #checks if user has registered for vaccine
         e = e.strip()
         f = f.strip()
         g = g.strip()
+        h = h.strip()
 
         if(a == username1 and b == password1):
             already_registered()
@@ -142,14 +144,15 @@ def update_success(): #writes information to file
     ageInfo = ageEntry.get()
     phoneInfo = phoneEntry.get()
     postcodeInfo = postcodeEntry.get()
+    occupationInfo = occupationEntry.get()
     chronicDiseaseInfo = chronicDisease.get()
     updateFile = open("user_personalinfo.txt", "a")
 
     if chronicDiseaseInfo == 1:
-        updateFile.write("\n"+username1+","+password1+","+fullNameInfo+","+ageInfo+","+phoneInfo+","+postcodeInfo+","+"True")
+        updateFile.write("\n"+username1+","+password1+","+fullNameInfo+","+ageInfo+","+phoneInfo+","+postcodeInfo+","+occupationInfo+","+"True")
         updateFile.close()
     elif chronicDiseaseInfo == 0:
-        updateFile.write("\n"+username1+","+password1+","+fullNameInfo+","+ageInfo+","+phoneInfo+","+postcodeInfo+","+"False")
+        updateFile.write("\n"+username1+","+password1+","+fullNameInfo+","+ageInfo+","+phoneInfo+","+postcodeInfo+","+occupationInfo+","+"False")
         updateFile.close()
 
     usernameUpdateEntry.delete(0,END)
@@ -157,7 +160,8 @@ def update_success(): #writes information to file
     fullNameEntry.delete(0,END)
     ageEntry.delete(0,END)
     phoneEntry.delete(0,END)
-    postcodeEntry .delete(0,END)    
+    postcodeEntry.delete(0,END) 
+    occupationEntry.delete(0,END)   
     messagebox.showinfo("Registration Successful", "Your registration for the COVID-19 Vaccine was successful. Please check the Vaccination Appointment Status page within 3-5 days for updates.")
     show_frame(frame5)
     
@@ -291,7 +295,7 @@ def info_screen():
     xdlines = list(openAnother.readlines())
 
     for i in xdlines:
-        a, b, c, d, e, f, g = i.split(",")
+        a, b, c, d, e, f, g, h = i.split(",")
         a = a.strip()
         b = b.strip()
         c = c.strip()
@@ -299,12 +303,14 @@ def info_screen():
         e = e.strip()
         f = f.strip()
         g = g.strip()
+        h = h.strip()
         if a == tempuser:
-            if (int(d) > 60) or (g =="True"):
+            if (int(d) > 60) or (h =="True"):
                 global risk_status
                 risk_status = "High"
             else:
                 risk_status = "Low"
+
 Label(frame5,text = "NotSejahtera",bg = "grey", font = ("Calibri", 20)).pack(fil = 'x')
 Label(frame5,text = f"Welcome back, {tempuser}. Your current risk status is {risk_status}.", font = ("Calibri", 20), pady = 50, padx = 10).pack()
 Button(frame5, text = "Vaccine Registration",width = 50, height=1, pady = 20, command = lambda:show_frame(frame6)).pack()
@@ -318,7 +324,7 @@ Label(frame6,text = "Current Username", pady = 10).pack()
 usernameUpdateEntry = Entry(frame6, width=15)
 usernameUpdateEntry.pack()
 Label(frame6,text = "Current Password", pady = 10).pack()
-passwordUpdateEntry = Entry(frame6, width=15)
+passwordUpdateEntry = Entry(frame6, width=15, show="*")
 passwordUpdateEntry.pack()
 Label(frame6,text = "Full Name as per NRIC", pady = 10).pack()
 fullNameEntry = Entry(frame6, width=70)
@@ -332,6 +338,9 @@ phoneEntry.pack()
 Label(frame6,text = "Postcode", pady = 5).pack()
 postcodeEntry = Entry(frame6, width=20)
 postcodeEntry.pack()
+Label(frame6,text = "Occupation", pady = 5).pack()
+occupationEntry = Entry(frame6, width=20)
+occupationEntry.pack()
 Label(frame6,text = "Do you have any chronic illnesses?(Diabetes, heart conditions, etc.)", pady = 10).pack()
 chronicDisease = IntVar()
 yesButton = Radiobutton(frame6, text="Yes", variable=chronicDisease, value=1)
