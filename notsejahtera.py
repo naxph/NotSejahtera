@@ -91,7 +91,7 @@ def wrong_password():
 #admin
 def login_success1():
     messagebox.showinfo("Cool Beans", "Login successful. Welcome Admin")
-    show_frame(frame6)
+    show_frame(frame10)
     #admin main page goes here
     
 def wrong_password1():
@@ -413,6 +413,35 @@ space2.pack()
 add_button.pack()
 remove_button.pack()
 
+# assign shit
+def assign_user():
+    x = user_list.get(user_list.curselection()) +', '+ vac_list.get(vac_list.curselection())
+    assigned_user.insert(x)
+
+
+user_list=Listbox(frame9,height=30,width=60)
+vac_list = Listbox(frame9,height=30,width=60)
+assigned_user=Listbox(frame9,height=30,width=60)
+
+for i in range(len(tempuser)):
+    user_list.insert(i,tempuser[i])
+
+assign_button= Button(frame9,text='Assign',command=assign_user)
+
+# empty space
+Label(frame9,text='').grid(row=0)
+Label(frame9,text='').grid(row=1,column=0,padx=90)
+
+# not empty space
+user_list.grid(row=1,column=1,padx=10,pady=10)
+vac_list.grid(row=1,column=2,padx=10,pady=10)
+assigned_user.grid(row=1,column=3,padx=10,pady=10)
+assign_button.grid(row=2,column=2)
+
+
+#admin menu
+Button(frame10, text = "Edit vaccination centre",width=10,height=1,command = lambda:show_frame(frame8)).pack()
+Button(frame10, text = "Assign user",width=10,height=1,command = lambda:show_frame(frame9)).pack()
 
 
 screen.mainloop()
