@@ -32,7 +32,7 @@ def register_user():
            Label(frame2, text=error3)
            break
     else:
-        file=open("user_details.txt","a")
+        file = open("user_details.txt","a")
         file.write("\n"+username_info+","+password_info)
         file.close()
         username_entry.delete(0,END)
@@ -72,6 +72,8 @@ def login_verify():
         if(a == username1 and b == password1):
             current_username(username1)
             login_success()
+            global infoscreen
+            infoscreen = 0
             break
     else:
         wrong_password()
@@ -188,7 +190,6 @@ def current_username(a): #Checks current username
     info_screen()
 
 
-
 #startup screen
 global screen
 screen = Tk()
@@ -289,33 +290,39 @@ Button(frame4, text = "Back",width = 10, height=1,command = lambda:show_frame(fr
 
 
 #information screen after login
+infoscreen = 1
 risk_status = ''
+occupation_status = ''
 def info_screen():
     openAnother = open("user_personalinfo.txt","r")
     xdlines = list(openAnother.readlines())
+    global infoscreen
 
-    for i in xdlines:
-        a, b, c, d, e, f, g, h = i.split(",")
-        a = a.strip()
-        b = b.strip()
-        c = c.strip()
-        d = d.strip()
-        e = e.strip()
-        f = f.strip()
-        g = g.strip()
-        h = h.strip()
-        if a == tempuser:
-            if (int(d) > 60) or (h =="True"):
-                global risk_status
-                risk_status = "High"
-            else:
-                risk_status = "Low"
+    if infoscreen  == 1:
+        for i in xdlines:
+            a, b, c, d, e, f, g, h = i.split(",")
+            a = a.strip()
+            b = b.strip()
+            c = c.strip()
+            d = d.strip()
+            e = e.strip()
+            f = f.strip()
+            g = g.strip()
+            h = h.strip()
+            if a == tempuser:
+                global occupation_status
+                occupation_status = h
+                if (int(d) > 60) or (g =="True"):
+                    global risk_status
+                    risk_status = "High"
+                else:
+                    risk_status = "Low"
+        Label(frame5,text = "NotSejahtera",bg = "grey", font = ("Calibri", 20)).pack(fil = 'x')
+        Label(frame5,text = f"Welcome back, {tempuser}. Your current risk status is {risk_status}.", font = ("Calibri", 20), pady = 50, padx = 10).pack()
+        Button(frame5, text = "Vaccine Registration",width = 50, height=1, pady = 20, command = lambda:show_frame(frame6)).pack()
+        Button(frame5, text = "Vaccination Appointment Status",width = 50, height=1, pady = 20, command = lambda:show_frame(frame7)).pack()
+        Button(frame5, text = "Logout",width = 50, height=1, pady = 20, command = lambda:show_frame(frame1)).pack()
 
-Label(frame5,text = "NotSejahtera",bg = "grey", font = ("Calibri", 20)).pack(fil = 'x')
-Label(frame5,text = f"Welcome back, {tempuser}. Your current risk status is {risk_status}.", font = ("Calibri", 20), pady = 50, padx = 10).pack()
-Button(frame5, text = "Vaccine Registration",width = 50, height=1, pady = 20, command = lambda:show_frame(frame6)).pack()
-Button(frame5, text = "Vaccination Appointment Status",width = 50, height=1, pady = 20, command = lambda:show_frame(frame7)).pack()
-Button(frame5, text = "Logout",width = 50, height=1, pady = 20, command = lambda:show_frame(frame1)).pack()
 
 #vaccination registration form
 Label(frame6,text = "NotSejahtera",bg = "grey", font = ("Calibri", 20)).pack(fil = 'x')
@@ -354,9 +361,20 @@ Button(frame6, text = "Cancel",width = 50, height=1, pady = 10, command = lambda
 Label(frame6,text = "").pack()
 
 #vaccination appointment status screen
+tempdate = "DD/MM/YY"
+templocation = "urmom"
+temptime = "16:06:09"
 Label(frame7,text = "NotSejahtera",bg = "grey", font = ("Calibri", 20)).pack(fil = 'x')
+Label(frame7, text=f"Appointment Date: \n {tempdate}", pady = 20).pack()
+Label(frame7, text=f"Appointment Time: \n {temptime}", pady = 40).pack()
+Label(frame7, text=f"Appointment Location: \n {templocation}", pady = 50).pack()
+Label(frame7,text = "Are you going to attend the appointment?", pady = 10).pack()
+Appointment = IntVar()
+yesButton = Radiobutton(frame7, text="Yes", variable=Appointment, value=1)
+yesButton.pack()
+noButton = Radiobutton(frame7, text="No", variable=Appointment, value=0)
+noButton.pack()
 Button(frame7, text = "Back",width = 50, height=1, pady = 10, command = lambda:show_frame(frame5)).pack()
-#to be continued
 
 
 #add/remove vaccination centre
