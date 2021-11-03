@@ -53,10 +53,10 @@ def admin_verify():
         a = a.strip()
         b = b.strip()
         if(a == username and b == password):
-            login_success()
+            login_success1()
             break
     else:
-        wrong_password()
+        wrong_password1()
 
 #public user login verification
 def login_verify():
@@ -203,8 +203,8 @@ frame5 = Frame(screen) #public user main landing page for after login
 frame6 = Frame(screen) #public user vaccination registration form
 frame7 = Frame(screen) #public user vaccination appointment status page
 frame8 = Frame(screen) #add/remove vaccination centre
-frame9 = Frame(screen) #unused
-frame10 = Frame(screen) #unused
+frame9 = Frame(screen) #assign user
+frame10 = Frame(screen) #admin menu
 screen.rowconfigure(0, weight=1)
 screen.columnconfigure(0, weight=1)
 for frame in(frame1,frame2,frame3,frame4,frame5,frame6,frame7,frame8,frame9,frame10):
@@ -378,12 +378,15 @@ Button(frame7, text = "Back",width = 50, height=1, pady = 10, command = lambda:s
 
 
 #add/remove vaccination centre
-Vac_centre=['Cyberjaya, MMU','Serdang, Hospital Serdang','Subang Jaya, INTI University']
+
+Vac_centre=['Cyberjaya, MMU, 8.00 am','Serdang, Hospital Serdang, 8.00am','Subang Jaya, INTI University, 8.00am']
+
 
 def add():
     x = textbox.get()
     vac_list.insert((len(Vac_centre)+1),x)
     textbox.delete(0,END)
+    Vac_centre.append(x)
     return
 
 # deletes selected item
@@ -394,7 +397,9 @@ def remove():
         return
 
 
-vac_list = Listbox(frame8,height=20,width=50)
+var1 = StringVar()
+
+vac_list = Listbox(frame8,height=20,width=50,selectmode=EXTENDED,listvariable=var1)
 for i in range(len(Vac_centre)):
     vac_list.insert(i,(Vac_centre[i]))
 
@@ -412,36 +417,46 @@ textbox.pack()
 space2.pack()
 add_button.pack()
 remove_button.pack()
+space2.pack()
+Button(frame8,text='Back',command=lambda:show_frame(frame10)).pack()
 
 # assign shit
 def assign_user():
-    x = user_list.get(user_list.curselection()) +', '+ vac_list.get(vac_list.curselection())
-    assigned_user.insert(x)
+    x = user_list.get(user_list.curselection()) +', '+ vac_list2.get(vac_list2.curselection())
+    assigned_user.insert(END,x)
+    
 
 
-user_list=Listbox(frame9,height=30,width=60)
-vac_list = Listbox(frame9,height=30,width=60)
+user_list=Listbox(frame9,height=30,width=60,exportselection=0)
+vac_list2 = Listbox(frame9,height=30,width=60,exportselection=0,listvariable=var1)
 assigned_user=Listbox(frame9,height=30,width=60)
 
-for i in range(len(tempuser)):
-    user_list.insert(i,tempuser[i])
+user_details = list(open('user_personalinfo.txt').readlines())
+for i in range(len(user_details)):
+    user_list.insert(END,f'{tempuser}, {occupation_status}') ## Problem
+
 
 assign_button= Button(frame9,text='Assign',command=assign_user)
 
 # empty space
 Label(frame9,text='').grid(row=0)
 Label(frame9,text='').grid(row=1,column=0,padx=90)
-
+Button(frame9,text='Back',command=lambda:show_frame(frame10)).grid(row=3,column=2)
 # not empty space
 user_list.grid(row=1,column=1,padx=10,pady=10)
-vac_list.grid(row=1,column=2,padx=10,pady=10)
+vac_list2.grid(row=1,column=2,padx=10,pady=10)
 assigned_user.grid(row=1,column=3,padx=10,pady=10)
 assign_button.grid(row=2,column=2)
 
 
 #admin menu
-Button(frame10, text = "Edit vaccination centre",width=10,height=1,command = lambda:show_frame(frame8)).pack()
-Button(frame10, text = "Assign user",width=10,height=1,command = lambda:show_frame(frame9)).pack()
+Label(frame10,text='Welcome Admin.',pady=30).pack()
+Label(frame10,text='',height=15).pack()
+Button(frame10, text = "Edit vaccination centre",width=20,height=1,command = lambda:show_frame(frame8)).pack()
+Label(frame10,text='').pack()
+Button(frame10, text = "Assign user",width=20,height=1,command = lambda:show_frame(frame9)).pack()
+Label(frame10,text='').pack()
+Button(frame10,text='Back',width=20,height=1,command=lambda:show_frame(frame1)).pack()
 
 
 screen.mainloop()
