@@ -432,8 +432,17 @@ vac_list2 = Listbox(frame9,height=30,width=60,exportselection=0,listvariable=var
 assigned_user=Listbox(frame9,height=30,width=60)
 
 user_details = list(open('user_personalinfo.txt').readlines())
-for i in range(len(user_details)):
-    user_list.insert(END,f'{tempuser}, {occupation_status}') ## Problem
+for line in user_details:
+    a,b,c,d,e,f,g,h = line.split(",")
+    a = a.strip() #username
+    b = b.strip() #password
+    c = c.strip() #full name
+    d = d.strip() #age
+    e = e.strip() #phone number
+    f = f.strip() #postcode
+    g = g.strip() #occupation
+    h = h.strip() #chronic disease status
+    user_list.insert(END,f'{c}, {d}, {g}') ## Problem
 
 
 assign_button= Button(frame9,text='Assign',command=assign_user)
