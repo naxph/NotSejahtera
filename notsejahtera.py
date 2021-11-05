@@ -424,8 +424,11 @@ Button(frame8,text='Back',command=lambda:show_frame(frame10)).pack()
 def assign_user():
     x = user_list.get(user_list.curselection()) +', '+ vac_list2.get(vac_list2.curselection())
     assigned_user.insert(END,x)
-    
+    user_list.insert(END, user_list.get(user_list.curselection())+' ✓')
+    user_list.delete(user_list.curselection())
 
+def remove_user():
+    assigned_user.delete(assigned_user.curselection())
 
 user_list=Listbox(frame9,height=30,width=60,exportselection=0)
 vac_list2 = Listbox(frame9,height=30,width=60,exportselection=0,listvariable=var1)
@@ -442,21 +445,22 @@ for line in user_details:
     f = f.strip() #postcode
     g = g.strip() #occupation
     h = h.strip() #chronic disease status
-    user_list.insert(END,f'{c}, {d}, {g}') ## Problem
+    user_list.insert(END,f'{c}, {d}, {g}') 
 
 
 assign_button= Button(frame9,text='Assign',command=assign_user)
-
+removeuser_button = Button(frame9,text='Remove',command=remove_user)
 # empty space
 Label(frame9,text='').grid(row=0)
 Label(frame9,text='').grid(row=1,column=0,padx=90)
-Button(frame9,text='Back',command=lambda:show_frame(frame10)).grid(row=3,column=2)
+
 # not empty space
+Button(frame9,text='Back',command=lambda:show_frame(frame10)).grid(row=4,column=2)
 user_list.grid(row=1,column=1,padx=10,pady=10)
 vac_list2.grid(row=1,column=2,padx=10,pady=10)
 assigned_user.grid(row=1,column=3,padx=10,pady=10)
 assign_button.grid(row=2,column=2)
-
+removeuser_button.grid(row=3,column=2)
 
 #admin menu
 Label(frame10,text='Welcome Admin.',pady=30).pack()
