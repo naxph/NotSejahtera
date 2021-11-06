@@ -403,6 +403,11 @@ vac_list = Listbox(frame8,height=20,width=50,selectmode=EXTENDED,listvariable=va
 for i in range(len(Vac_centre)):
     vac_list.insert(i,(Vac_centre[i]))
 
+vac_listS = Scrollbar(frame8)
+vac_listS.pack(side=RIGHT,fill=Y)
+vac_list.config(yscrollcommand=vac_listS.set)
+vac_listS.config(command=vac_list.yview)
+
 
 add_button = Button(frame8,text='Add vaccination centre',command=lambda: add())
 remove_button = Button(frame8,text='Remove vaccination centre',command=lambda: remove())
@@ -428,11 +433,29 @@ def assign_user():
     user_list.delete(user_list.curselection())
 
 def remove_user():
-    assigned_user.delete(assigned_user.curselection())
+    assigned_user.delete(END,assigned_user.curselection())
 
 user_list=Listbox(frame9,height=30,width=60,exportselection=0)
 vac_list2 = Listbox(frame9,height=30,width=60,exportselection=0,listvariable=var1)
-assigned_user=Listbox(frame9,height=30,width=60)
+assigned_user=Listbox(frame9,height=30,width=60,exportselection=0)
+
+user_listS = Scrollbar(frame9)
+user_listS.grid(row=1,column=2,rowspan=5)
+user_list.config(yscrollcommand=user_listS.set)
+user_listS.config(command=user_list.yview)
+
+
+vac_list2S = Scrollbar(frame9)
+vac_list2S.grid(row=1,column=4,rowspan=5)
+vac_list2.config(yscrollcommand=vac_list2S.set)
+vac_list2S.config(command=vac_list2.yview)
+
+assigned_userS = Scrollbar(frame9)
+assigned_userS.grid(row=1,column=6,rowspan=5)
+assigned_user.config(yscrollcommand=assigned_userS.set)
+assigned_userS.config(command=assigned_user.yview)
+
+
 
 user_details = list(open('user_personalinfo.txt').readlines())
 for line in user_details:
@@ -453,14 +476,15 @@ removeuser_button = Button(frame9,text='Remove',command=remove_user)
 # empty space
 Label(frame9,text='').grid(row=0)
 Label(frame9,text='').grid(row=1,column=0,padx=90)
+Label(frame9,text='').grid(row=4)
 
 # not empty space
-Button(frame9,text='Back',command=lambda:show_frame(frame10)).grid(row=4,column=2)
+Button(frame9,text='Back',command=lambda:show_frame(frame10)).grid(row=5,column=3)
 user_list.grid(row=1,column=1,padx=10,pady=10)
-vac_list2.grid(row=1,column=2,padx=10,pady=10)
-assigned_user.grid(row=1,column=3,padx=10,pady=10)
-assign_button.grid(row=2,column=2)
-removeuser_button.grid(row=3,column=2)
+vac_list2.grid(row=1,column=3,padx=10,pady=10)
+assigned_user.grid(row=1,column=5,padx=10,pady=10)
+assign_button.grid(row=2,column=3)
+removeuser_button.grid(row=3,column=3)
 
 #admin menu
 Label(frame10,text='Welcome Admin.',pady=30).pack()
