@@ -22,7 +22,7 @@
 from tkinter import*
 from tkinter import messagebox
 
-#frame1
+#logout - exit program
 def showframe1():
     exit()
 
