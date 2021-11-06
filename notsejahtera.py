@@ -522,8 +522,6 @@ def remove_user():
             if a in assigned_user.curselection():
                 fileread.write(line)
 
-
-
     
 user_list=Listbox(frame9,height=30,width=60,exportselection=0)
 vac_list2 = Listbox(frame9,height=30,width=60,exportselection=0,listvariable=var1)
@@ -557,7 +555,6 @@ for line in user_details:
     f = f.strip() #postcode
     g = g.strip().lower() #occupation
     h = h.strip() #chronic disease status
-
     if g =='doctor'or g =='nurse' or g=='soldier' :
         risk_level = 5
     elif g=='teacher' or g=='lecturer' or g =='student' or g=='politician':
