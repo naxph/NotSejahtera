@@ -1,2 +1,20 @@
-naxph,ilovelaffey,Aniq Danial Bin Mohd Adli,18,0123456789,12345,Weeb,True
-garlic,onion123,Lee Heng Yep,18,012345678,54321,Human,True
+naxph,ilovelaffey,Aniq Danial Bin Mohd Adli,18,0123456789,12345,Software Engineer,True
+garlic,onion123,Lee Heng Yep,18,012345678,54321,Unemployed,True
+bob_barker,helloworld,Bob Barker,29,0112223334,43201,Doctor,False
+sam_simon,password,Sam Simon,50,0114445555,22372,Nurse,True
+dcku,madamiscool,Ku Day Chyi,45,0383125044,63100,Lecturer,False
+noobmaster69,sadpepe,Ali Bin Ahmad,70,0136547890,47100,Teacher,True
+megaweeb,miku123,Levi Ackerman,36,0124582480,321456,Soldier,False
+snottyboy,metroman,Ismail Bin Sabri,60,0184560283,890654,Politician,False
+steezykane,maxverstappen123,Max Verstappen,23,0174629462,456789,Motorsport Driver,False
+ricardomilos,abc123,Ricardo Milos,30,0165925649,456321,Youtuber,True
+john.doe,qwerty,John Doe,80,0157693857,098765,Unemployed,True
+gordon_ramsay,lambsauce,Gordon Ramsay,45,0164910154,765123,Chef,False
+lewis.hamilton,12345678,Lewis Hamilton,36,0146783210,234890,Motorsport Driver,False
+jorjor1122,11111,Ramasamy A/L Muthu,60,0168638907,231768,Doctor,False
+superidol,qwerty123,Xi Jinping,67,0137890123,120349,Politician,True
+corn_bread,54321,Chee Cheong Fun,20,0146592859,089123,Student,False
+bird.chicken,abcde12345,Akagi Kaga,30,0146501836,567432,Ship Technician,False
+butterdog,woofwoof,Ian Leong,18,0174629475,456098,Student,False
+chimney,santaclaus,Ernest Leong,18,0194538912,123654,Student,False
+james_may,123genius,James May,73,0132174532,786213,Engineer,True
