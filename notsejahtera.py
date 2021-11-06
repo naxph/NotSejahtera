@@ -397,22 +397,23 @@ def appointment_status():
     xdlines = list(readVaccination.readlines())
 
     for i in xdlines:
-        a, b, c, d, e, f, g, h = i.split(",")
+        a, b, c, d, e, f, g, h, j = i.split(",")
         a = a.strip() #name
         b = b.strip() #age
         c = c.strip() #occupation
         d = d.strip() #username
-        e = e.strip() #vaccination_location
-        f = f.strip() #vaccination_location2
-        g = g.strip() #time
-        h = h.strip() #date
+        e = e.strip() #risk status
+        f = f.strip() #location
+        g = g.strip() #point
+        h = h.strip() #time
+        j = j.strip() #date
         if tempuser == d:
             global templocation
-            templocation =  f + ',' + e
+            templocation =  g + ',' + f
             global temptime
-            temptime = g
+            temptime = h
             global tempdate
-            tempdate = h 
+            tempdate = j
             readVaccination.close()
             break
         
@@ -568,12 +569,12 @@ for line in user_details:
     elif g=='unemployed' or g=='youtuber' or g=='software engineer':
         risk_level = 1
     else:
-        risk_level = 'Unknown risk, run away immedi-'
-    user_list.insert(END,f'{c}, {d}, {g}, {risk_level}')
+        risk_level = 'cyak blyt'
+    user_list.insert(END,f'{c}, {d}, {g}, {a}, {risk_level}')
 
 
 assign_button= Button(frame9,text='Assign',command=assign_user)
-removeuser_button= Button(frame9,text='Assign',command=remove_user)
+removeuser_button= Button(frame9,text='Remove',command=remove_user)
 
 
 # empty space
