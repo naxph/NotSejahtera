@@ -507,7 +507,7 @@ def remove_user():
 
     with open (r'vaccination.txt', 'w') as fileread:
 
-        for i, line in (linesread):
+        for i in (linesread):
             a, b, c, d, e, f, g, h = i.strip('\n')
             a = a.strip() # user name
             b = b.strip()
