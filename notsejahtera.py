@@ -1,6 +1,30 @@
+# ********************************************************* 
+# Program: YOUR_FILENAME.py 
+# Course: PSP0101 PROBLEM SOLVING AND PROGRAM DESIGN 
+# Class: TT0? 
+# Trimester: 2110
+# Year: 2021/22 Trimester 1 
+# Member_1: 1211101734 | ERNEST LEONG ZHENG YANG | 1211101734@student.mmu.edu.my | 01155355639
+# Member_2: 1211101591 | IAN LEONG TSUNG JII | 211101591@student.mmu.edu.my | 0192835699
+# Member_3: ID | NAME | EMAIL | PHONES
+# Member_4: ID | NAME | EMAIL | PHONES 
+# *********************************************************
+# Task Distribution
+# Member_1: Menu and result display
+# Member_2: Account sign up and login authentication
+# Member_3: 
+# Member_4:
+# *********************************************************
+
+
+
+
 from tkinter import*
 from tkinter import messagebox
 
+#frame1
+def showframe1():
+    exit()
 
 #Switch frames
 def show_frame(frame):
@@ -183,9 +207,10 @@ def update_info(): #checks if username and password are correct
     else:
         no_password()
 
-tempuser = ''
+tempuser = None
 def current_username(a): #Checks current username
     global tempuser
+    tempuser = "none"
     tempuser = a
     info_screen()
 
@@ -315,13 +340,15 @@ def info_screen():
                 if (int(d) > 60) or (g =="True"):
                     global risk_status
                     risk_status = "High"
+
                 else:
                     risk_status = "Low"
+
         Label(frame5,text = "NotSejahtera",bg = "grey", font = ("Calibri", 20)).pack(fil = 'x')
         Label(frame5,text = f"Welcome back, {tempuser}. Your current risk status is {risk_status}.", font = ("Calibri", 20), pady = 50, padx = 10).pack()
         Button(frame5, text = "Vaccine Registration",width = 50, height=1, pady = 20, command = lambda:show_frame(frame6)).pack()
-        Button(frame5, text = "Vaccination Appointment Status",width = 50, height=1, pady = 20, command = lambda:show_frame(frame7)).pack()
-        Button(frame5, text = "Logout",width = 50, height=1, pady = 20, command = lambda:show_frame(frame1)).pack()
+        Button(frame5, text = "Vaccination Appointment Status",width = 50, height=1, pady = 20, command = appointment_status).pack()
+        Button(frame5, text = "Logout",width = 50, height=1, pady = 20, command = showframe1).pack()
 
 
 #vaccination registration form
@@ -361,25 +388,63 @@ Button(frame6, text = "Cancel",width = 50, height=1, pady = 10, command = lambda
 Label(frame6,text = "").pack()
 
 #vaccination appointment status screen
-tempdate = "DD/MM/YY"
-templocation = "urmom"
-temptime = "16:06:09"
-Label(frame7,text = "NotSejahtera",bg = "grey", font = ("Calibri", 20)).pack(fil = 'x')
-Label(frame7, text=f"Appointment Date: \n {tempdate}", pady = 20).pack()
-Label(frame7, text=f"Appointment Time: \n {temptime}", pady = 40).pack()
-Label(frame7, text=f"Appointment Location: \n {templocation}", pady = 50).pack()
-Label(frame7,text = "Are you going to attend the appointment?", pady = 10).pack()
-Appointment = IntVar()
-yesButton = Radiobutton(frame7, text="Yes", variable=Appointment, value=1)
-yesButton.pack()
-noButton = Radiobutton(frame7, text="No", variable=Appointment, value=0)
-noButton.pack()
-Button(frame7, text = "Back",width = 50, height=1, pady = 10, command = lambda:show_frame(frame5)).pack()
+tempdate = ""
+templocation = ""
+temptime = ""
+
+def appointment_status():
+    readVaccination = open("vaccination.txt","r")
+    xdlines = list(readVaccination.readlines())
+
+    for i in xdlines:
+        a, b, c, d, e, f, g, h = i.split(",")
+        a = a.strip() #name
+        b = b.strip() #age
+        c = c.strip() #occupation
+        d = d.strip() #username
+        e = e.strip() #vaccination_location
+        f = f.strip() #vaccination_location2
+        g = g.strip() #time
+        h = h.strip() #date
+        if tempuser == d:
+            global templocation
+            templocation =  f + ',' + e
+            global temptime
+            temptime = g
+            global tempdate
+            tempdate = h 
+            readVaccination.close()
+            break
+        
+    show_frame(frame7)
+    Label(frame7,text = "NotSejahtera",bg = "grey", font = ("Calibri", 20)).pack(fil = 'x')
+    Label(frame7, text=f"Appointment Date: \n {tempdate}", pady = 20).pack()
+    Label(frame7, text=f"Appointment Time: \n {temptime}", pady = 40).pack()
+    Label(frame7, text=f"Appointment Location: \n {templocation}", pady = 50).pack()
+    Label(frame7,text = "Are you going to attend the appointment?", pady = 10).pack()
+    Appointment = IntVar()
+    yesButton = Radiobutton(frame7, text="Yes", variable=Appointment, value=1, command = yesAttend)
+    yesButton.pack()
+    noButton = Radiobutton(frame7, text="No", variable=Appointment, value=0, command = noAttend)
+    noButton.pack()
+    Button(frame7, text = "Back",width = 50, height=1, pady = 10, command = lambda:show_frame(frame5)).pack()
+    
+def yesAttend():
+    x = open ('vaccination_RSVP.txt', 'a')
+    x.write(f'RSVP : {tempuser}, Yes\n')
+    x.close()
+
+def noAttend():
+    x = open ('vaccination_RSVP.txt', 'a')
+    x.write(f'RSVP : {tempuser}, No\n')
+    x.close()
+
+
 
 
 #add/remove vaccination centre
 
-Vac_centre=['Cyberjaya, MMU, 8.00 am','Serdang, Hospital Serdang, 8.00am','Subang Jaya, INTI University, 8.00am']
+Vac_centre=['Cyberjaya, MMU, 8.00 am, 19/11/2021','Serdang, Hospital Serdang, 8.00am, 20/11/2021','Subang Jaya, INTI University, 8.00am, 21/11/2021']
 
 
 def add():
@@ -422,8 +487,12 @@ Button(frame8,text='Back',command=lambda:show_frame(frame10)).pack()
 
 # assign shit
 def assign_user():
+    openVaccination = open("vaccination.txt","a")
     x = user_list.get(user_list.curselection()) +', '+ vac_list2.get(vac_list2.curselection())
     assigned_user.insert(END,x)
+    openVaccination.write(x + '\n')
+    openVaccination.close()
+
     
 
 
@@ -442,7 +511,7 @@ for line in user_details:
     f = f.strip() #postcode
     g = g.strip() #occupation
     h = h.strip() #chronic disease status
-    user_list.insert(END,f'{c}, {d}, {g}') ## Problem
+    user_list.insert(END,f'{c}, {d}, {g}, {a}') ## Problem
 
 
 assign_button= Button(frame9,text='Assign',command=assign_user)
@@ -459,6 +528,7 @@ assign_button.grid(row=2,column=2)
 
 
 #admin menu
+Label(frame10,text = "NotSejahtera",bg = "grey", font = ("Calibri", 20)).pack(fil = 'x')
 Label(frame10,text='Welcome Admin.',pady=30).pack()
 Label(frame10,text='',height=15).pack()
 Button(frame10, text = "Edit vaccination centre",width=20,height=1,command = lambda:show_frame(frame8)).pack()
