@@ -566,7 +566,7 @@ for line in user_details:
     elif g=='unemployed' or g=='youtuber' or g=='software engineer':
         risk_level = 1
     else:
-        risk_level = 'cyak blyt'
+        risk_level = 1
     user_list.insert(END,f'{c}, {d}, {g}, {a}, {risk_level}')
 
 
