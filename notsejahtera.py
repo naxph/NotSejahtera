@@ -492,6 +492,7 @@ space2.pack()
 Button(frame8,text='Back',command=lambda:show_frame(frame10)).pack()
 
 # assign shit
+
 def assign_user():
     openVaccination = open("vaccination.txt","a")
     x = user_list.get(user_list.curselection()) +', '+ vac_list2.get(vac_list2.curselection())
@@ -521,9 +522,6 @@ def remove_user():
                 fileread.write(line)
 
 
-
-
-    
 
     
 user_list=Listbox(frame9,height=30,width=60,exportselection=0)
@@ -556,13 +554,27 @@ for line in user_details:
     d = d.strip() #age
     e = e.strip() #phone number
     f = f.strip() #postcode
-    g = g.strip() #occupation
+    g = g.strip().lower() #occupation
     h = h.strip() #chronic disease status
-    user_list.insert(END,f'{c}, {d}, {g}, {a}')
+
+    if g =='doctor'or g =='nurse' or g=='soldier' :
+        risk_level = 5
+    elif g=='teacher' or g=='lecturer' or g =='student' or g=='politician':
+        risk_level = 4
+    elif g=='motorsport driver' or g=='chef':
+        risk_level = 3
+    elif g=='ship technician':
+        risk_level = 2
+    elif g=='unemployed' or g=='youtuber' or g=='software engineer':
+        risk_level = 1
+    else:
+        risk_level = 'Unknown risk, run away immedi-'
+    user_list.insert(END,f'{c}, {d}, {g}, {risk_level}')
 
 
 assign_button= Button(frame9,text='Assign',command=assign_user)
-removeuser_button= Button(frame9,text='Remove',command=remove_user)
+removeuser_button= Button(frame9,text='Assign',command=remove_user)
+
 
 # empty space
 Label(frame9,text='').grid(row=0)
