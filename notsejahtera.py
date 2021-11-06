@@ -1,19 +1,19 @@
 # ********************************************************* 
-# Program: YOUR_FILENAME.py 
+# Program: notsejahtera.py 
 # Course: PSP0101 PROBLEM SOLVING AND PROGRAM DESIGN 
-# Class: TT0? 
+# Class: TL6V 
 # Trimester: 2110
 # Year: 2021/22 Trimester 1 
 # Member_1: 1211101734 | ERNEST LEONG ZHENG YANG | 1211101734@student.mmu.edu.my | 01155355639
 # Member_2: 1211101591 | IAN LEONG TSUNG JII | 211101591@student.mmu.edu.my | 0192835699
 # Member_3: 1211101790 | LEE HENG YEP | 1211101790@student.mmu.edu.my | 0188703882
-# Member_4: ID | NAME | EMAIL | PHONES 
+# Member_4: 1211101704 | ANIQ DANIAL BIN MOHD ADLI | 1211101704@student.mmu.edu.my | 01114464903 
 # *********************************************************
 # Task Distribution
 # Member_1: Menu and result display
 # Member_2: Account sign up and login authentication
 # Member_3: Administrator assign appointment, create vaccination centre and generate list
-# Member_4:
+# Member_4: Public user update information and view appointment
 # *********************************************************
 
 
