@@ -6,13 +6,13 @@
 # Year: 2021/22 Trimester 1 
 # Member_1: 1211101734 | ERNEST LEONG ZHENG YANG | 1211101734@student.mmu.edu.my | 01155355639
 # Member_2: 1211101591 | IAN LEONG TSUNG JII | 211101591@student.mmu.edu.my | 0192835699
-# Member_3: ID | NAME | EMAIL | PHONES
+# Member_3: 1211101790 | LEE HENG YEP | 1211101790@student.mmu.edu.my | 0188703882
 # Member_4: ID | NAME | EMAIL | PHONES 
 # *********************************************************
 # Task Distribution
 # Member_1: Menu and result display
 # Member_2: Account sign up and login authentication
-# Member_3: 
+# Member_3: Administrator assign appointment, create vaccination centre and generate list
 # Member_4:
 # *********************************************************
 
