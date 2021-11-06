@@ -6,13 +6,13 @@
 # Year: 2021/22 Trimester 1 
 # Member_1: 1211101734 | ERNEST LEONG ZHENG YANG | 1211101734@student.mmu.edu.my | 01155355639
 # Member_2: 1211101591 | IAN LEONG TSUNG JII | 211101591@student.mmu.edu.my | 0192835699
-# Member_3: ID | NAME | EMAIL | PHONES
+# Member_3: 1211101790 | LEE HENG YEP | 1211101790@student.mmu.edu.my | 0188703882
 # Member_4: ID | NAME | EMAIL | PHONES 
 # *********************************************************
 # Task Distribution
 # Member_1: Menu and result display
 # Member_2: Account sign up and login authentication
-# Member_3: 
+# Member_3: Administrator assign appointment, create vaccination centre and generate list
 # Member_4:
 # *********************************************************
 
@@ -468,6 +468,12 @@ vac_list = Listbox(frame8,height=20,width=50,selectmode=EXTENDED,listvariable=va
 for i in range(len(Vac_centre)):
     vac_list.insert(i,(Vac_centre[i]))
 
+# scrollbar
+vac_listS = Scrollbar(frame8)
+vac_listS.pack(side=RIGHT,fill=Y)
+vac_list.config(yscrollcommand=vac_listS.set)
+vac_listS.config(command=vac_list.yview)
+
 
 add_button = Button(frame8,text='Add vaccination centre',command=lambda: add())
 remove_button = Button(frame8,text='Remove vaccination centre',command=lambda: remove())
@@ -493,12 +499,53 @@ def assign_user():
     openVaccination.write(x + '\n')
     openVaccination.close()
 
+lines2 = []
+def remove_user():
+    assigned_user.delete(END,assigned_user.curselection())
+    with open (r'vaccination.txt', 'r') as fileread:
+        linesread = fileread.readlines()
+
+    with open (r'vaccination.txt', 'w') as fileread:
+
+        for i, line in (linesread):
+            a, b, c, d, e, f, g, h = i.strip('\n')
+            a = a.strip() # user name
+            b = b.strip()
+            c = c.strip()
+            d = d.strip()
+            e = e.strip()
+            f = f.strip()
+            g = g.strip()
+            h = h.strip()
+            if a in assigned_user.curselection():
+                fileread.write(line)
+
+
+
+
     
 
-
+    
 user_list=Listbox(frame9,height=30,width=60,exportselection=0)
 vac_list2 = Listbox(frame9,height=30,width=60,exportselection=0,listvariable=var1)
 assigned_user=Listbox(frame9,height=30,width=60)
+
+# scrollbar
+user_listS = Scrollbar(frame9)
+user_listS.grid(row=1,column=2,rowspan=5)
+user_list.config(yscrollcommand=user_listS.set)
+user_listS.config(command=user_list.yview)
+
+vac_list2S = Scrollbar(frame9)
+vac_list2S.grid(row=1,column=4,rowspan=5)
+vac_list2.config(yscrollcommand=vac_list2S.set)
+vac_list2S.config(command=vac_list2.yview)
+
+assigned_userS = Scrollbar(frame9)
+assigned_userS.grid(row=1,column=6,rowspan=5)
+assigned_user.config(yscrollcommand=assigned_userS.set)
+assigned_userS.config(command=assigned_user.yview)
+
 
 user_details = list(open('user_personalinfo.txt').readlines())
 for line in user_details:
@@ -511,20 +558,22 @@ for line in user_details:
     f = f.strip() #postcode
     g = g.strip() #occupation
     h = h.strip() #chronic disease status
-    user_list.insert(END,f'{c}, {d}, {g}, {a}') ## Problem
+    user_list.insert(END,f'{c}, {d}, {g}, {a}')
 
 
 assign_button= Button(frame9,text='Assign',command=assign_user)
+removeuser_button= Button(frame9,text='Remove',command=remove_user)
 
 # empty space
 Label(frame9,text='').grid(row=0)
 Label(frame9,text='').grid(row=1,column=0,padx=90)
-Button(frame9,text='Back',command=lambda:show_frame(frame10)).grid(row=3,column=2)
 # not empty space
+Button(frame9,text='Back',command=lambda:show_frame(frame10)).grid(row=5,column=3)
 user_list.grid(row=1,column=1,padx=10,pady=10)
-vac_list2.grid(row=1,column=2,padx=10,pady=10)
-assigned_user.grid(row=1,column=3,padx=10,pady=10)
-assign_button.grid(row=2,column=2)
+vac_list2.grid(row=1,column=3,padx=10,pady=10)
+assigned_user.grid(row=1,column=5,padx=10,pady=10)
+assign_button.grid(row=2,column=3)
+removeuser_button.grid(row=3,column=3)
 
 
 #admin menu
