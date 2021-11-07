@@ -238,7 +238,10 @@ for frame in(frame1,frame2,frame3,frame4,frame5,frame6,frame7,frame8,frame9,fram
 
 show_frame(frame1)
 Label(frame1,text = "NotSejahtera",bg = "grey", font = ("Calibri", 20)).pack(fil = 'x')
-Label(frame1,text = "",height=18).pack()
+Label(frame1,text = "",height=2).pack()
+photo = PhotoImage(file='startup.png')
+Label(frame1, image=photo).pack()
+Label(frame1,text = "",height=2).pack()
 Button(frame1,text = "Login", height = "2", width = "30", command = lambda:show_frame(frame3)).pack()
 Label(frame1,text = "").pack()
 Button(frame1,text = "Register", height = "2", width = "30", command= lambda:show_frame(frame2)).pack()
