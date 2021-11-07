@@ -21,10 +21,13 @@
 
 from tkinter import*
 from tkinter import messagebox
+import os
 
 #frame1
-def showframe1():
-    exit()
+def restart():
+    screen.destroy
+    os.startfile("notsejahtera.py")
+    show_frame(frame1)
 
 #Switch frames
 def show_frame(frame):
@@ -352,7 +355,7 @@ def info_screen():
         Label(frame5,text = f"Welcome back, {tempuser}. Your current risk status is {risk_status}.", font = ("Calibri", 20), pady = 50, padx = 10).pack()
         Button(frame5, text = "Vaccine Registration",width = 50, height=1, pady = 20, command = lambda:show_frame(frame6)).pack()
         Button(frame5, text = "Vaccination Appointment Status",width = 50, height=1, pady = 20, command = appointment_status).pack()
-        Button(frame5, text = "Logout",width = 50, height=1, pady = 20, command = showframe1).pack()
+        Button(frame5, text = "Logout",width = 50, height=1, pady = 20, command = restart).pack()
 
 
 #vaccination registration form
