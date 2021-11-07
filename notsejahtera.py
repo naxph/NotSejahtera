@@ -493,17 +493,25 @@ space2.pack()
 Button(frame8,text='Back',command=lambda:show_frame(frame10)).pack()
 
 # assign shit
-
+count = 0
 def assign_user():
     openVaccination = open("vaccination.txt","a")
     x = user_list.get(user_list.curselection()) +', '+ vac_list2.get(vac_list2.curselection())
     assigned_user.insert(END,x)
     openVaccination.write(x + '\n')
     openVaccination.close()
+    global count
+    count += 1
+    if count >20:
+        errormsg.configure(text='Max user per timeslot exceeded (20)')
+        count = 0
+
+errormsg=Label(frame9,text='',width=70)
 
 lines2 = []
 def remove_user():
-    assigned_user.delete(END,assigned_user.curselection())
+    assigned_user.delete(assigned_user.curselection())
+    errormsg.configure(text='')
     with open (r'vaccination.txt', 'r') as fileread:
         linesread = fileread.readlines()
 
@@ -582,6 +590,7 @@ Button(frame9,text='Back',command=lambda:show_frame(frame10)).grid(row=5,column=
 user_list.grid(row=1,column=1,padx=10,pady=10)
 vac_list2.grid(row=1,column=3,padx=10,pady=10)
 assigned_user.grid(row=1,column=5,padx=10,pady=10)
+errormsg.grid(row=2,column=5)
 assign_button.grid(row=2,column=3)
 removeuser_button.grid(row=3,column=3)
 
