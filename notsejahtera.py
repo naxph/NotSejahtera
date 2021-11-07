@@ -16,12 +16,14 @@
 # Member_4: Public user update information and view appointment
 # *********************************************************
 
+
+
+
 from tkinter import*
 from tkinter import messagebox
 import os
 import sys
 
-# *************main function definitions*************
 #frame1
 def restart():
     python = sys.executable
@@ -128,8 +130,8 @@ def no_password(): #shows error if wrong username or password
     messagebox.showinfo("Error", "Wrong username or password")
     show_frame(frame5)
 
-#shows error if the user has already registered
-def already_registered(): 
+
+def already_registered(): #shows error if the user has already registered
     messagebox.showinfo("Error", "You have already registered for vaccination. Please check the Vaccination Appointment Status page within 3-5 days for updates.")
     usernameUpdateEntry.delete(0,END)
     passwordUpdateEntry.delete(0,END)
@@ -140,8 +142,8 @@ def already_registered():
     occupationEntry.delete(0,END)  
     show_frame(frame5)
 
-#checks if user has registered for vaccine
-def check_register():
+
+def check_register(): #checks if user has registered for vaccine
     username1 = usernameUpdateEntry.get()
     password1 = passwordUpdateEntry.get()
     readFile = open("user_personalinfo.txt", "r")
@@ -163,8 +165,8 @@ def check_register():
     else:
         update_success()
         
-#writes information to file
-def update_success(): 
+
+def update_success(): #writes information to file
     username1 = usernameUpdateEntry.get()
     password1 = passwordUpdateEntry.get()
     fullNameInfo = fullNameEntry.get()
@@ -192,8 +194,8 @@ def update_success():
     messagebox.showinfo("Registration Successful", "Your registration for the COVID-19 Vaccine was successful. Please check the Vaccination Appointment Status page within 3-5 days for updates.")
     show_frame(frame5)
     
-#checks if username and password are correct
-def update_info(): 
+
+def update_info(): #checks if username and password are correct
     username1 = usernameUpdateEntry.get()
     password1 = passwordUpdateEntry.get()
     readFile = open("user_details.txt", "r")
@@ -208,17 +210,14 @@ def update_info():
     else:
         no_password()
 
-#Checks current username
 tempuser = None
-def current_username(a): 
+def current_username(a): #Checks current username
     global tempuser
     tempuser = "none"
     tempuser = a
     info_screen()
 
-# *********************************************************
 
-#**********main GUI**********
 #startup screen
 global screen
 screen = Tk()
@@ -273,7 +272,6 @@ Label(frame2,text = "").pack()
 Button(frame2,text="Register",width = 10, height = 1,command = register_user).pack()
 Label(frame2,text = "").pack()
 Button(frame2,text="Back",width = 10, height = 1,command =lambda:show_frame(frame1)).pack()
-
 
 #login
 Label(frame3,text = "NotSejahtera",bg = "grey", font = ("Calibri", 20)).pack(fil = 'x')
@@ -357,7 +355,7 @@ def info_screen():
         Label(frame5,text = f"Welcome back, {tempuser}. Your current risk status is {risk_status}.", font = ("Calibri", 20), pady = 50, padx = 10).pack()
         Button(frame5, text = "Vaccine Registration",width = 50, height=1, pady = 20, command = lambda:show_frame(frame6)).pack()
         Button(frame5, text = "Vaccination Appointment Status",width = 50, height=1, pady = 20, command = appointment_status).pack()
-        Button(frame5, text = "Logout & Exit",width = 50, height=1, pady = 20, command = restart).pack()
+        Button(frame5, text = "Logout",width = 50, height=1, pady = 20, command = restart).pack()
 
 
 #vaccination registration form
@@ -451,7 +449,10 @@ def noAttend():
     x.close()
 
 
+
+
 #add/remove vaccination centre
+
 Vac_centre=['Cyberjaya, MMU, 8.00 am, 19/11/2021','Serdang, Hospital Serdang, 8.00am, 20/11/2021','Subang Jaya, INTI University, 8.00am, 21/11/2021']
 
 
@@ -489,7 +490,7 @@ textbox = Entry(frame8,text = '',width=50)
 space = Label(frame8, text='', pady=50)
 space2 = Label(frame8,text='')
 
-#packs
+
 space.pack()
 vac_list.pack()
 textbox.pack()
@@ -499,7 +500,7 @@ remove_button.pack()
 space2.pack()
 Button(frame8,text='Back',command=lambda:show_frame(frame10)).pack()
 
-# assign users
+# assign shit
 count = 0
 def assign_user():
     openVaccination = open("vaccination.txt","a")
@@ -582,10 +583,12 @@ for line in user_details:
         risk_level = 1
     else:
         risk_level = 1
-    user_list.insert(END,f'{c}, {d}, {g}, {risk_level}')
+    user_list.insert(END,f'{c}, {d}, {g}, {a}, {risk_level}')
+
 
 assign_button= Button(frame9,text='Assign',command=assign_user)
 removeuser_button= Button(frame9,text='Remove',command=remove_user)
+
 
 # empty space
 Label(frame9,text='').grid(row=0)
@@ -599,6 +602,7 @@ errormsg.grid(row=2,column=5)
 assign_button.grid(row=2,column=3)
 removeuser_button.grid(row=3,column=3)
 
+
 #admin menu
 Label(frame10,text = "NotSejahtera",bg = "grey", font = ("Calibri", 20)).pack(fil = 'x')
 Label(frame10,text='Welcome Admin.',pady=30).pack()
@@ -609,5 +613,5 @@ Button(frame10, text = "Assign user",width=20,height=1,command = lambda:show_fra
 Label(frame10,text='').pack()
 Button(frame10,text='Back',width=20,height=1,command=lambda:show_frame(frame1)).pack()
 
-#the magic command that makes tkinter work
+
 screen.mainloop()
