@@ -453,20 +453,15 @@ def noAttend():
 
 #add/remove vaccination centre
 
+Vac_centre=['Cyberjaya, MMU, 8.00 am, 19/11/2021','Serdang, Hospital Serdang, 8.00am, 20/11/2021','Subang Jaya, INTI University, 8.00am, 21/11/2021']
+
 
 def add():
-    with open('vac_centre.txt','r') as vac_read:
-        y = vac_read.readlines()
-    num = 0
-    for i in y:
-        num += 1
     x = textbox.get()
-    vac_list.insert((num+1),x)
-    with open('vac_centre.txt','w') as vac_centre:
-            vac_centre.write(x,'\n')
+    vac_list.insert((len(Vac_centre)+1),x)
     textbox.delete(0,END)
+    Vac_centre.append(x)
     return
-
 
 # deletes selected item
 def remove():
@@ -479,14 +474,8 @@ def remove():
 var1 = StringVar()
 
 vac_list = Listbox(frame8,height=20,width=50,selectmode=EXTENDED,listvariable=var1)
-
-with open('vac_centre.txt','r') as vac_read:    
-    x = vac_read.readlines()
-    num = 0
-    for i in x:
-        num += 1
-    for i in x:
-        vac_list.insert(END,i)
+for i in range(len(Vac_centre)):
+    vac_list.insert(i,(Vac_centre[i]))
 
 # scrollbar
 vac_listS = Scrollbar(frame8)
@@ -495,7 +484,8 @@ vac_list.config(yscrollcommand=vac_listS.set)
 vac_listS.config(command=vac_list.yview)
 
 
-add_button = Button(frame8,text='Add vaccination centre',command=add)
+add_button = Button(frame8,text='Add vaccination centre',command=lambda: add())
+remove_button = Button(frame8,text='Remove vaccination centre',command=lambda: remove())
 textbox = Entry(frame8,text = '',width=50)
 space = Label(frame8, text='', pady=50)
 space2 = Label(frame8,text='')
@@ -506,6 +496,7 @@ vac_list.pack()
 textbox.pack()
 space2.pack()
 add_button.pack()
+remove_button.pack()
 space2.pack()
 Button(frame8,text='Back',command=lambda:show_frame(frame10)).pack()
 
@@ -596,7 +587,7 @@ for line in user_details:
 
 
 assign_button= Button(frame9,text='Assign',command=assign_user)
-
+removeuser_button= Button(frame9,text='Remove',command=remove_user)
 
 
 # empty space
@@ -609,6 +600,7 @@ vac_list2.grid(row=1,column=3,padx=10,pady=10)
 assigned_user.grid(row=1,column=5,padx=10,pady=10)
 errormsg.grid(row=2,column=5)
 assign_button.grid(row=2,column=3)
+removeuser_button.grid(row=3,column=3)
 
 
 #admin menu
