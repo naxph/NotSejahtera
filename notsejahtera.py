@@ -29,7 +29,6 @@ def restart():
     python = sys.executable
     os.execl(python, python, * sys.argv)
     
-
 #Switch frames
 def show_frame(frame):
     frame.tkraise()
@@ -437,6 +436,7 @@ def appointment_status():
     noButton = Radiobutton(frame7, text="No", variable=Appointment, value=0, command = noAttend)
     noButton.pack()
     Button(frame7, text = "Back",width = 50, height=1, pady = 10, command = lambda:show_frame(frame5)).pack()
+    Label(frame7,text = "",height = 1000).pack()
     
 def yesAttend():
     x = open ('vaccination_RSVP.txt', 'a')
