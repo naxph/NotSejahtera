@@ -18,3 +18,4 @@ bird.chicken,abcde12345,Akagi Kaga,30,0146501836,567432,Ship Technician,False
 butterdog,woofwoof,Ian Leong,18,0174629475,456098,Student,False
 chimney,santaclaus,Ernest Leong,18,0194538912,123654,Student,False
 james_may,123genius,James May,73,0132174532,786213,Engineer,True
+leongernest,123123,ERNEST LEONG ZHENG YANG,18,011123345,47100,STUDENT,True

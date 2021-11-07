@@ -218,6 +218,7 @@ def current_username(a): #Checks current username
 #startup screen
 global screen
 screen = Tk()
+screen.iconbitmap('logofinish.ico')
 screen.state("zoomed")
 screen.title("NotSejahtera")
 frame1 = Frame(screen) #startup screen
