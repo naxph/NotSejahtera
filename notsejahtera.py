@@ -22,12 +22,13 @@
 from tkinter import*
 from tkinter import messagebox
 import os
+import sys
 
 #frame1
 def restart():
-    screen.destroy
-    os.startfile("notsejahtera.py")
-    show_frame(frame1)
+    python = sys.executable
+    os.execl(python, python, * sys.argv)
+    
 
 #Switch frames
 def show_frame(frame):
