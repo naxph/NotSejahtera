@@ -43,19 +43,19 @@ def register_user():
         a = a.strip()
         b = b.strip()
         if len(username.get() and password.get()) == 0:
-           error = messagebox.showerror("Cool Beans", "fields cannot be empty, idiot")
+           error = messagebox.showerror("Notsejahtera", "fields cannot be empty")
            Label(frame2, text=error)
            break
         elif len(username.get() and password.get()) < 5:
-           error1 = messagebox.showerror("Cool Beans", "Username and password must have at least 6 characters")
+           error1 = messagebox.showerror("Notsejahtera", "Username and password must have at least 6 characters")
            Label(frame2, text=error1)
            break
         elif "," in username.get() or "," in password.get():
-           error2 = messagebox.showerror("Cool Beans", "Username and password cannot contain ',' ")
+           error2 = messagebox.showerror("Notsejahtera", "Username and password cannot contain ',' ")
            Label(frame2, text=error2)
            break
         elif(a == username.get()):
-           error3 = messagebox.showerror("Cool Beans", "Username already taken ")
+           error3 = messagebox.showerror("Notsejahtera", "Username already taken ")
            Label(frame2, text=error3)
            break
     else:
@@ -64,7 +64,7 @@ def register_user():
         file.close()
         username_entry.delete(0,END)
         password_entry.delete(0,END)
-        info = messagebox.showinfo("Cool Beans", "Registration successful")
+        info = messagebox.showinfo("Notsejahtera", "Registration successful")
         Label(frame2, text = info)
 
 #admin login verification
@@ -107,22 +107,22 @@ def login_verify():
 
 #public user
 def login_success():
-    messagebox.showinfo("Cool Beans", "Login Successful")
+    messagebox.showinfo("Notsejahtera", "Login Successful")
     show_frame(frame5)
     #public user main page goes here
 
 def wrong_password():
-    messagebox.showinfo("Cool Beans", "wrong username or password")
+    messagebox.showinfo("Notsejahtera", "wrong username or password")
     show_frame(frame1)
 
 #admin
 def login_success1():
-    messagebox.showinfo("Cool Beans", "Login successful. Welcome Admin")
+    messagebox.showinfo("Notsejahtera", "Login successful. Welcome Admin")
     show_frame(frame10)
     #admin main page goes here
     
 def wrong_password1():
-    messagebox.showinfo("Cool Beans", "wrong username or password")
+    messagebox.showinfo("Notsejahtera", "wrong username or password")
     show_frame(frame1)
 
 #personal information update system
