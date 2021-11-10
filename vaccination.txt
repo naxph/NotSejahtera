@@ -1,3 +1,4 @@
 ERNEST LEONG ZHENG YANG, 18, student, leongernest, 4, Cyberjaya, MMU, 8.00 am, 19/11/2021
 Ian Leong Tsung Jii, 18, postman, ianleong, 1, Subang Jaya, INTI University, 8.00am, 21/11/2021
-
+Aniq Danial Bin Mohd Adli, 18, software engineer, naxph, 1, Cyberjaya, MMU, 8.00 am, 19/11/2021
+Lee Heng Yep, 18, student, garlic, 4, Serdang, Hospital Serdang, 8.00am, 20/11/2021
