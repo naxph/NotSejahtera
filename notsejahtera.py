@@ -5,7 +5,7 @@
 # Trimester: 2110
 # Year: 2021/22 Trimester 1 
 # Member_1: 1211101734 | ERNEST LEONG ZHENG YANG | 1211101734@student.mmu.edu.my | 01155355639
-# Member_2: 1211101591 | IAN LEONG TSUNG JII | 211101591@student.mmu.edu.my | 0192835699
+# Member_2: 1211101591 | IAN LEONG TSUNG JII | 121101591@student.mmu.edu.my | 0192835699
 # Member_3: 1211101790 | LEE HENG YEP | 1211101790@student.mmu.edu.my | 0188703882
 # Member_4: 1211101704 | ANIQ DANIAL BIN MOHD ADLI | 1211101704@student.mmu.edu.my | 01114464903 
 # *********************************************************
