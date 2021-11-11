@@ -46,7 +46,7 @@ def register_user():
            error = messagebox.showerror("Notsejahtera", "fields cannot be empty")
            Label(frame2, text=error)
            break
-        elif len(username.get() and password.get()) < 5:
+        elif len(username.get() or password.get()) <= 5:
            error1 = messagebox.showerror("Notsejahtera", "Username and password must have at least 6 characters")
            Label(frame2, text=error1)
            break
